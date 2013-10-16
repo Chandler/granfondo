@@ -3,7 +3,7 @@ $(document).ready(function () {
   path, vis, xy,
   duration, offset, origin_x, origin_y, len, group, circle;
 
-  var width  = 1100;
+  var width  = 1200;
   var height = 1100;
 
   //http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
@@ -36,18 +36,18 @@ $(document).ready(function () {
     var routes = ["gran", "gran_wc", "medio", "medio_wc","piccolo"]
     // var routes = ["gran_wc","medio_wc"]
     var colors = {
-      "gran": "#000",
-      "gran_wc": "#000",
-      "medio": "#E67C1A",
-      "medio_wc": "#E67C1A",
-      "piccolo": "#FF0000"
+      "gran": "#38383A",
+      "gran_wc": "#38383A",
+      "medio": "#DD610E",
+      "medio_wc": "#DD610E",
+      "piccolo": "#850C29"
     }
     var path = autoScaledProjection(json);
     var riders = json.riders
 
     vis = d3.select("#map")
       .append("svg:svg")
-      .attr("width", 1100)
+      .attr("width", 1500)
       .attr("height", 1100);
 
     //draw paths
@@ -89,7 +89,7 @@ $(document).ready(function () {
       var j;
       for(j =0; j < riders.length; j++) {
         var speed = riders[j]["wall_clock_seconds"];
-        var rounded_speed = Math.floor((speed/100))*100
+        var rounded_speed = Math.floor((speed/100))*1000
         if (deduplicater[route][rounded_speed]){
           console.log("dont draw this rider");
           continue;
@@ -106,7 +106,7 @@ $(document).ready(function () {
 
         var circle = group.append("circle")
           .attr({
-          r: 2,
+          r: 2.5,
           fill: colors[route],
           route: route,
           transform: function () {
