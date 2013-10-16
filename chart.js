@@ -3,8 +3,8 @@ $(document).ready(function () {
   path, vis, xy,
   duration, offset, origin_x, origin_y, len, group, circle;
 
-  var width  = 1200;
-  var height = 1100;
+  var width  = 900;
+  var height = 900;
 
   //http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
   var autoScaledProjection = function(json) {
@@ -88,25 +88,35 @@ $(document).ready(function () {
       
       var j;
       for(j =0; j < riders.length; j++) {
+        var bib = riders[j]["bib"];
         var speed = riders[j]["wall_clock_seconds"];
-        var rounded_speed = Math.floor((speed/100))*1000
-        if (deduplicater[route][rounded_speed]){
-          console.log("dont draw this rider");
-          continue;
+        var rounded_speed = Math.floor((speed/100))*100
+        
+
+        var radius;
+        if(["5084","5501","5857","3237","2996"].indexOf(bib) > -1) {
+          radius = 8;
         }else {
-          deduplicater[route][rounded_speed] = true;
-          count = count+1;       
+          if (deduplicater[route][rounded_speed]){
+            //dont draw this rider
+            continue;
+          }else {
+            deduplicater[route][rounded_speed] = true;
+            count = count+1;       
+          }
+          radius = 2;
         }
+
 
         //lazy load
         if(!pathNodes[route]){
           var targetPath = d3.selectAll('.' + route + '_route')[0][0];
           pathNodes[route] = d3.select(targetPath).selectAll('path').node();
         }
-
+        if(radius == 3) {console.log("ok")}
         var circle = group.append("circle")
           .attr({
-          r: 2.5,
+          r: radius,
           fill: colors[route],
           route: route,
           transform: function () {
@@ -117,7 +127,7 @@ $(document).ready(function () {
         });
 
          circle.transition()
-          .duration(speed)
+          .duration(rounded_speed*2)
           .ease("linear")
           .attrTween("transform", function (d, index) {
             var nodes = pathNodes[this.getAttribute('route')];
