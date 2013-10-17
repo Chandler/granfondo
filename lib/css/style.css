@@ -1,0 +1,67 @@
+body {
+  background-color: #F1F1F1;
+}
+.header {
+  top: 50px;
+  position: absolute;
+  right: 500px;
+ font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+ font-weight: 300;
+  font-size: 26px;
+}
+
+.restart {
+  top: 180;
+  position: absolute;
+  right: 86px;
+  margin: 15px;
+  width: 153px;
+}
+
+.gran {
+  background-color: #38383A;
+}
+.medio {
+  background-color: #DD610E;
+}
+
+.piccolo {
+  background-color: #850C29;
+}
+
+.circle {
+  float: left;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+.legend {
+ font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+ font-weight: 300;
+  top: 75px;
+  position: absolute;
+  margin-right: 30px;
+  right: 20px;
+}
+.legend-item {
+  right: 20px;
+  width: 190px;
+  margin-right: 10px;
+  margin-top: 10px;
+  clear: both;
+  float: left;
+}
+.text {
+  float: left;
+  margin-left: 12px;
+}
+.title {
+  clear: both;
+}
+.chooser{
+  position: absolute;
+  top: 250px;
+  right: 300px;
+  width: 350px;
+}

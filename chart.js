@@ -3,8 +3,8 @@ $(document).ready(function () {
   var height = 800;
   var json;
   var group;
-  var highlighted = ["5084","5501","5857","3237","2996"];
-  var highlighted = ["5084"];
+  var highlighted_rider_ids = []; //Twicycles crew ["5084","5501","5857","3237","2996"]
+  var first_pass = true;
 
   var ROUTES = [
     "gran", 
@@ -21,9 +21,36 @@ $(document).ready(function () {
     "piccolo":  "#850C29"
   }
 
+  //highlight any users specified in the query string
+  var query_ids = Arg('ids');
+  if(query_ids && query_ids.length > 0) {
+    highlighted_rider_ids = $.map(query_ids, function(id){
+      return id.toString();
+    })
+  }
+
+  console.log(highlighted_rider_ids)
+
   $('.restart').on('click', function(){
-    drawCircles();
+    drawCircles({});
   })
+
+  $('select').on('change', function(evt, params) {
+    //add or remove id from highlighted_rider_ids 
+    if(params["selected"]) {
+      highlighted_rider_ids.push(params["selected"])
+    }
+    
+    if(params["deselected"]) {
+      var index = highlighted_rider_ids.indexOf(params["deselected"]);
+      if (index > -1) {
+          highlighted_rider_ids.splice(index, 1);
+      }
+    }
+    //calculate new url based on the contents of highlighted_rider_ids
+    var new_params = Arg.stringify({ids: highlighted_rider_ids});
+    window.history.pushState("", "", window.location.href.split('?')[0] + "?" + new_params);
+  });
 
 
   d3.json("data.json", function(json) {
@@ -52,11 +79,16 @@ $(document).ready(function () {
     }
 
     group = vis.append("svg:g");
-    drawCircles();
+    
+    drawCircles({first_pass: true});
+    
+    $(".chosen-select").chosen({
+      width: 600,
+      max_selected_options: 6
+    });
   });
 
-
-  var drawCircles = function() {
+  var drawCircles = function(options) {
     d3.selectAll('circle').remove();
     var pathNodes    = {};
     var deduplicater = {};
@@ -70,13 +102,20 @@ $(document).ready(function () {
 
       for(var j =0; j < riders.length; j++) {
         var radius;
-        var bib           = riders[j]["bib"];
-        var speed         = riders[j]["wall_clock_seconds"];
-        var rounded_speed = Math.floor((speed/80))*80; //round to nearest 100 seconds for grouping
+        var name           = riders[j]["name"];
+        var bib            = riders[j]["bib"];
+        var speed          = riders[j]["wall_clock_seconds"];
+        var rounded_speed  = Math.floor((speed/80))*80; //round to nearest 100 seconds for grouping
+        var is_highlighted = highlighted_rider_ids.indexOf(bib) > -1;
         
-        
+        if(options["first_pass"]){
+          //render dropdown select
+          var option_string = is_highlighted ? "<option selected></option>" : "<option></option>";
+          $('select').append($(option_string).text(name).val(bib));
+        }
+
         //Always draw a rider who is being highlighted
-        if(highlighted.indexOf(bib) > -1) {
+        if(is_highlighted) {
           radius = 8;
         } else {
           //one draw one circle for each distinct rounded_speed per route

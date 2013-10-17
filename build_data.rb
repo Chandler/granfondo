@@ -51,7 +51,7 @@ CSV.foreach("riders.csv") do |row|
   if row[0] == nil || row[1] == nil ||  row[2] == nil ||  row[3] == nil ||  row[4] == nil ||  row[5] == nil || row[6] == nil
     next
   end
-
+  name = row[0]
   start_time_seconds_epoch = Time.parse(row[3]).to_i #date agnostic
   clock_time_seconds = ChronicDuration.parse(row[6])
   category = row[2].downcase
@@ -87,13 +87,14 @@ CSV.foreach("riders.csv") do |row|
 
   riders[route] ||= []
   riders[route] << {
+    "name" => name,
     "bib" => bib,
     "wall_clock_seconds" => clock_time_seconds
   }
 
 end
 
-File.open('riders.json', 'w') {|f| f.write(JSON.pretty_generate(geo_json.merge(riders))) }
+File.open('data.json', 'w') {|f| f.write(JSON.pretty_generate(geo_json.merge(riders))) }
 
 
 

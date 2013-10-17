@@ -1,66 +1,7 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/lib/css/style.css">
+<link rel="stylesheet" href="/lib/css/chosen.css">
 <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-<style type="text/css">
-  body {
-    background-color: #F1F1F1;
-  }
-  .header {
-    top: 50px;
-    position: absolute;
-    right: 500px;
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300;
-    font-size: 26px;
-  }
-
-  .restart {
-    position: absolute;
-    right: 127px;
-    margin: 15px;
-  }
-
-  .gran {
-    background-color: #38383A;
-  }
-  .medio {
-    background-color: #DD610E;
-  }
-
-  .piccolo {
-    background-color: #850C29;
-  }
-
-  .circle {
-    float: left;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-  }
-
-  .legend {
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300;
-    top: 75px;
-    position: absolute;
-    margin-right: 30px;
-    right: 20px;
-  }
-  .legend-item {
-    right: 20px;
-    width: 190px;
-    margin-right: 10px;
-    margin-top: 10px;
-    clear: both;
-    float: left;
-  }
-  .text {
-    float: left;
-    margin-left: 12px;
-  }
-  .title {
-    clear: both;
-  }
-</style>
 <div class="header">
   <div>LEVI'S GRANFONDO</div>
   <div>October 5th 2013</div>
@@ -81,8 +22,14 @@
   </div>
 </div>
 <div class="restart btn btn-default">restart</div>
+<div class="chooser">
+  <select data-placeholder="Select riders to highlight" style="display: none;" multiple class="chosen-select" tabindex="-1">
+    <option value=""></option>
+  </select>
+</div>
 <div id="map"></div>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js"></script>
+<script src="/lib/js/args.js"></script>
 <script src="/chart.js" charset="utf-8"></script>
