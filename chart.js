@@ -25,7 +25,7 @@ $(document).ready(function () {
   var query_ids = Arg('ids');
   if(query_ids && query_ids.length > 0) {
     highlighted_rider_ids = $.map(query_ids, function(id){
-      return id.toString();
+      return id.toString().replace(/\//g,''); //remove any slashes that ended up in the query params
     })
   }
 
