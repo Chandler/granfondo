@@ -1,5 +1,72 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <style type="text/css">
+  body {
+    background-color: #F1F1F1;
+  }
+  .header {
+    position: absolute;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .restart {
+    position: absolute;
+    right: 127px;
+    margin: 15px;
+  }
+
+  .gran {
+    background-color: #38383A;
+  }
+  .medio {
+    background-color: #DD610E;
+  }
+
+  .piccolo {
+    background-color: #850C29;
+  }
+
+  .circle {
+    float: left;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+  }
+
+  .legend {
+    top: 75px;
+    position: absolute;
+    margin-right: 30px;
+    right: 20px;
+  }
+  .legend-item {
+    right: 20px;
+    width: 190px;
+    margin-right: 10px;
+    margin-top: 10px;
+    clear: both;
+    float: left;
+  }
+  .text {
+    float: left;
+    margin-left: 12px;
+  }
 </style>
+<div class="header">Levi's Granfondo</div>
+<div class="legend">
+  <div class="legend-item">
+    <div class="circle  gran"></div>
+    <span class="text"> Gran: 103 miles </span>
+  </div>
+  <div class="legend-item">
+    <div class="circle medio"></div>
+    <span class="text"> Medio: 65 miles </span>
+  </div>
+  <div class="legend-item">
+    <div class="circle piccolo"></div>
+    <span class="text"> Piccolo: 32 miles </span>
+  </div>
+</div>
+<div class="restart btn btn-default">restart</div>
 <div id="map"></div>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
