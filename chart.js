@@ -50,6 +50,7 @@ $(document).ready(function () {
     //calculate new url based on the contents of highlighted_rider_ids
     var new_params = Arg.stringify({ids: highlighted_rider_ids});
     window.history.pushState("", "", window.location.href.split('?')[0] + "?" + new_params);
+    // drawCircles({});
   });
 
 
@@ -78,18 +79,19 @@ $(document).ready(function () {
         .attr("stroke", "#333");
     }
 
-    group = vis.append("svg:g");
     
     drawCircles({first_pass: true});
     
     $(".chosen-select").chosen({
       width: 600,
-      max_selected_options: 6
+      max_selected_options: 20
     });
   });
 
   var drawCircles = function(options) {
+    group = vis.append("svg:g");
     d3.selectAll('circle').remove();
+    d3.selectAll('text').remove();
     var pathNodes    = {};
     var deduplicater = {};
     for(var i = 0; i < ROUTES.length; i++) {
@@ -154,7 +156,33 @@ $(document).ready(function () {
               var p = nodes.getPointAtLength(nodes.getTotalLength()*t);
               return "translate(" + [p.x, p.y] + ")";
             }
-        }); 
+          });
+
+
+        if(is_highlighted) {
+          var text = group.append("text")
+            .attr({
+              route: route,
+              name: name,
+              transform: function () {
+                var nodes = pathNodes[this.getAttribute('route')];
+                var p = nodes.getPointAtLength(0)
+                return "translate(" + [p.x, p.y] + ")";
+              }
+            })
+            .text( function (d) { return this.getAttribute('name'); })
+
+          text.transition()
+            .duration(rounded_speed*2)
+            .ease("linear")
+            .attrTween("transform", function (d, index) {
+              var nodes = pathNodes[this.getAttribute('route')];
+              return function (t) {
+                var p = nodes.getPointAtLength(nodes.getTotalLength()*t);
+                return "translate(" + [p.x, p.y] + ")";
+              }
+            });
+        }
       }
     } 
   }
