@@ -3,8 +3,8 @@ $(document).ready(function () {
   var height = 800;
   var json;
   var group;
-  //var highlighted = ["5084","5501","5857","3237","2996"];
-  var highlighted = [];
+  var highlighted = ["5084","5501","5857","3237","2996"];
+  var highlighted = ["5084"];
 
   var ROUTES = [
     "gran", 
