@@ -5,7 +5,7 @@ $(document).ready(function () {
   var group;
   var highlighted_rider_ids = []; //Twicycles crew ["5084","5501","5857","3237","2996"]
   var first_pass = true;
-
+  var speed_up_factor = 3; //multiplier for animation speed
   var ROUTES = [
     "gran", 
     "gran_wc", 
@@ -14,8 +14,8 @@ $(document).ready(function () {
     "piccolo"]
   
   var ROUTE_COLORS = {
-    "gran":     "#38383A",
-    "gran_wc":  "#38383A",
+    "gran":     "#1C1C1D",
+    "gran_wc":  "#1C1C1D",
     "medio":    "#DD610E",
     "medio_wc": "#DD610E",
     "piccolo":  "#850C29"
@@ -126,7 +126,7 @@ $(document).ready(function () {
           }else {
             deduplicater[route][rounded_speed] = true;
           }
-          radius = 2;
+          radius = 2.5;
         }
 
         //lazy initialize pathnodes for each route
@@ -148,7 +148,7 @@ $(document).ready(function () {
         });
 
          circle.transition()
-          .duration(rounded_speed*2)
+          .duration(rounded_speed*speed_up_factor)
           .ease("linear")
           .attrTween("transform", function (d, index) {
             var nodes = pathNodes[this.getAttribute('route')];
@@ -170,16 +170,18 @@ $(document).ready(function () {
                 return "translate(" + [p.x, p.y] + ")";
               }
             })
-            .text( function (d) { return this.getAttribute('name'); })
+            .text( function (d) { return this.getAttribute('name').split(' ')[0]; })
 
           text.transition()
-            .duration(rounded_speed*2)
+            .duration(rounded_speed*speed_up_factor)
             .ease("linear")
             .attrTween("transform", function (d, index) {
               var nodes = pathNodes[this.getAttribute('route')];
               return function (t) {
-                var p = nodes.getPointAtLength(nodes.getTotalLength()*t);
-                return "translate(" + [p.x+40, p.y+40] + ")";
+                var left_anchor = nodes.getPointAtLength((nodes.getTotalLength()*t)-15);
+                var right_anchor = nodes.getPointAtLength((nodes.getTotalLength()*t)+15);
+                var triangle = constructTriangleFromLine([left_anchor.x,left_anchor.y],[right_anchor.x,right_anchor.y]);
+                return "translate(" + [triangle[2][0], triangle[2][1]] + ")";
               }
             });
         }
@@ -212,4 +214,28 @@ $(document).ready(function () {
       .scale(scale).translate(offset);
     return path.projection(projection);d
   }
+
+  //porting some trig methods from a python graphics library my roommate wrote
+  //https://github.com/isnotinvain/hurrr/blob/master/src/twod.py
+  var constructTriangleFromLine = function(pt1, pt2){
+    //   return: a list of points that describe an equilteral triangle around the segment from pt1 --> pt2
+    var halfHeightVector = [0.57735 * (pt2[1] - pt1[1]), 0.57735 * (pt2[0] - pt1[0])];
+    var pt3 = [pt1[0] + halfHeightVector[0], pt1[1] - halfHeightVector[1]];
+    var pt4 = [pt1[0] - halfHeightVector[0], pt1[1] + halfHeightVector[1]];
+    return [pt2, pt3, pt4];
+  };
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,9 @@
 body {
-  background-color: #F1F1F1;
+  background: url(lib/img/background3.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .header {
   top: 50px;
@@ -8,6 +12,7 @@ body {
  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
  font-weight: 300;
   font-size: 26px;
+  color: #1C1C1D;
 }
 
 .restart {
@@ -19,7 +24,7 @@ body {
 }
 
 .gran {
-  background-color: #38383A;
+  background-color: #1C1C1D;
 }
 .medio {
   background-color: #DD610E;
@@ -43,6 +48,7 @@ body {
   position: absolute;
   margin-right: 30px;
   right: 20px;
+  font-size: 18px;
 }
 .legend-item {
   right: 20px;
@@ -64,4 +70,10 @@ body {
   top: 250px;
   right: 300px;
   width: 350px;
+}
+#credit {
+  position: absolute;
+  left: 12;
+  bottom: 11px;
+  font-size: 12px;
 }
