@@ -179,7 +179,7 @@ $(document).ready(function () {
               var nodes = pathNodes[this.getAttribute('route')];
               return function (t) {
                 var p = nodes.getPointAtLength(nodes.getTotalLength()*t);
-                return "translate(" + [p.x, p.y] + ")";
+                return "translate(" + [p.x+40, p.y+40] + ")";
               }
             });
         }
