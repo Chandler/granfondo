@@ -44,7 +44,7 @@ body {
 .legend {
  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
  font-weight: 300;
-  top: 75px;
+  top: 45px;
   position: absolute;
   margin-right: 30px;
   right: 20px;
@@ -76,4 +76,8 @@ body {
   left: 12;
   bottom: 11px;
   font-size: 12px;
+}
+body a
+{
+    color: rgb(5, 42, 88) !important;
 }

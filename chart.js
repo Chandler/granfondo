@@ -107,7 +107,7 @@ $(document).ready(function () {
         var name           = riders[j]["name"];
         var bib            = riders[j]["bib"];
         var speed          = riders[j]["wall_clock_seconds"];
-        var rounded_speed  = Math.floor((speed/80))*80; //round to nearest 100 seconds for grouping
+        var rounded_speed  = Math.floor((speed/80))*80; //round for grouping
         var is_highlighted = highlighted_rider_ids.indexOf(bib) > -1;
         
         if(options["first_pass"]){
