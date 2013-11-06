@@ -11,7 +11,7 @@ root = 'http://ridewithgps.com/routes/'
 
 route_ids = {
   "gran" => 733774,
-  "gran_wc" => 709516,
+  "chandler" => 709516,
   "medio" => 709525,
   "medio_wc" => 689185,
   "piccolo" => 604436
