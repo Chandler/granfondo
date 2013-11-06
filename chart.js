@@ -15,9 +15,8 @@ $(document).ready(function () {
   
   var ROUTE_COLORS = {
     "gran":     "#1C1C1D",
-    "gran_wc":  "#1C1C1D",
-    "medio":    "#DD610E",
-    "medio_wc": "#DD610E",
+    "medio":    "#DD614E",
+    "medio_wc": "#DD614E",
     "piccolo":  "#850C29"
   }
 
@@ -35,7 +34,7 @@ $(document).ready(function () {
     drawCircles({});
   })
 
-  $('select').on('change', function(evt, params) {
+  $('selet').on('change', function(evt, params) {
     //add or remove id from highlighted_rider_ids 
     if(params["selected"]) {
       highlighted_rider_ids.push(params["selected"])
